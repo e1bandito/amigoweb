@@ -1,5 +1,10 @@
 <template>
-  <form action="" class="form"></form>
+  <div class="form">
+    <form action="" class="form__body">
+      <h1 class="form__title">Регистрация</h1>
+      <p class="form__text">Уже есть аккаунт? <a href="#" class="form__link">Войти</a></p>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -9,18 +14,5 @@ export default {
 </script>
 
 <style lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
