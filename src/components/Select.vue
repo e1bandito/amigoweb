@@ -2,7 +2,7 @@
   <div class="select">
     <p class="select__label">Язык</p>
     <div class="select__inner">
-      <div class="select__placeholder">Язык</div>
+      <div class="select__placeholder" tabindex="0">Язык</div>
       <ul class="select__list">
         <li class="select__item">Русский</li>
         <li class="select__item">Английский</li>
@@ -64,6 +64,12 @@ export default {
     border-left: 2px solid $input-border-focus-color;
     border-bottom: 2px solid $input-border-focus-color;
     transform: rotate(-45deg);
+  }
+
+  &:focus {
+    outline: none;
+    border: 2px solid $input-border-focus-color;
+    padding: 14px 56px 13px 15px;
   }
 
   &:hover {

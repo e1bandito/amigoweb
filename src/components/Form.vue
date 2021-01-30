@@ -5,6 +5,7 @@
       <p class="form__text">Уже есть аккаунт? <a href="#" class="form__link">Войти</a></p>
       <Input/>
       <Select/>
+      <Checkbox/>
     </form>
   </div>
 </template>
@@ -12,11 +13,14 @@
 <script>
 import Select from "@/components/Select";
 import Input from "@/components/Input";
+import Checkbox from "@/components/Checkbox";
 
 export default {
   name: 'Form',
   components: {
-    Select, Input
+    Checkbox,
+    Select,
+    Input
   }
 }
 </script>
