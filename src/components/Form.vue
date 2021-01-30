@@ -1,11 +1,18 @@
 <template>
   <div class="form">
-    <form action="" class="form__body">
+    <form
+        action=""
+        class="form__body"
+        @submit.prevent="onClick"
+    >
       <h1 class="form__title">Регистрация</h1>
       <p class="form__text">Уже есть аккаунт? <a href="#" class="form__link">Войти</a></p>
       <Input/>
       <Select/>
       <Checkbox/>
+      <Btn
+      @click="onClick"
+      />
     </form>
   </div>
 </template>
@@ -14,13 +21,20 @@
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import Checkbox from "@/components/Checkbox";
+import Btn from "@/components/Btn";
 
 export default {
   name: 'Form',
   components: {
+    Btn,
     Checkbox,
     Select,
     Input
+  },
+  methods: {
+    onClick () {
+      console.log(1);
+    }
   }
 }
 </script>
