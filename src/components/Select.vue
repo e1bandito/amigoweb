@@ -50,7 +50,6 @@ export default {
   cursor: pointer;
   padding: 15px 57px 14px 16px;
   color: $text-light-blue;
-  transition: color 0.3s, border-color 0.3s;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -68,8 +67,14 @@ export default {
   }
 
   &:hover {
-    border-color: $input-border-focus-color;
+    border: 2px solid $input-border-focus-color;
+    padding: 14px 56px 13px 15px;
     color: $text-main;
+
+    &::after {
+      top: 13px;
+      right: 19px;
+    }
   }
 }
 

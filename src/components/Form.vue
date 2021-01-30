@@ -3,6 +3,7 @@
     <form action="" class="form__body">
       <h1 class="form__title">Регистрация</h1>
       <p class="form__text">Уже есть аккаунт? <a href="#" class="form__link">Войти</a></p>
+      <Input/>
       <Select/>
     </form>
   </div>
@@ -10,11 +11,12 @@
 
 <script>
 import Select from "@/components/Select";
+import Input from "@/components/Input";
 
 export default {
   name: 'Form',
   components: {
-    Select
+    Select, Input
   }
 }
 </script>
