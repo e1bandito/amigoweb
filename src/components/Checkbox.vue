@@ -21,7 +21,7 @@ export default {
 
 .checkbox {
   position: relative;
-  padding-bottom: 24px;
+  padding-bottom: 42px;
 }
 
 .checkbox__label {
@@ -69,7 +69,7 @@ export default {
 }
 
 .checkbox__field:focus + .checkbox__label::before {
-  border: 2px solid $checkbox-border-check-color;
+  box-shadow: $checkbox-shadow-focus;
 }
 
 .checkbox__link {

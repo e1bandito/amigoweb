@@ -21,7 +21,7 @@ export default {
 
 .input {
   position: relative;
-  padding-bottom: 24px;
+  padding-bottom: 33px;
 }
 
 .input__label {
@@ -32,7 +32,7 @@ export default {
 }
 
 .input__field {
-  padding: 16px 16px 15px;
+  padding: 15px 16px 15px;
   margin-top: 7px;
   width: 100%;
   background: $white;

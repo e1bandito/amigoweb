@@ -1,22 +1,53 @@
 <template>
   <div class="select">
-    <p class="select__label">Язык</p>
+    <p class="select__label">{{ select.label }}</p>
     <div class="select__inner">
-      <div class="select__placeholder" tabindex="0">Язык</div>
-      <ul class="select__list">
-        <li class="select__item">Русский</li>
-        <li class="select__item">Английский</li>
-        <li class="select__item">Китайский</li>
-        <li class="select__item">Испанский</li>
+      <div
+          class="select__placeholder"
+          tabindex="0"
+          :class="{'select__placeholder--selected' : select.change}"
+          @click="toggleList"
+      >{{ select.placeholder }}</div>
+      <ul
+          class="select__list"
+          v-if="openList"
+      >
+        <li class="select__item"
+            v-for="(item, itemIndex) in select.options"
+            :key="itemIndex"
+            :class="{'select__item--active' : item.active}"
+            @click="onSelectItem(itemIndex)"
+        >{{ item.text }}</li>
       </ul>
     </div>
-    <span class="select__error">Выберите один из пунктов</span>
+    <span
+        class="select__error"
+        v-if="select.change && !select.valid"
+    >{{ select.error }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Select"
+  name: "Select",
+  props: {
+    select: Object,
+    selectIndex: Number
+  },
+  data () {
+    return {
+      openList: false
+    }
+  },
+  methods: {
+    toggleList () {
+      this.openList = !this.openList;
+    },
+    onSelectItem (itemIndex) {
+      this.openList = false;
+      this.$emit('selected', itemIndex, this.selectIndex);
+    }
+  }
 }
 </script>
 
@@ -26,7 +57,7 @@ export default {
 .select {
   position: relative;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 .select__label {
@@ -57,10 +88,10 @@ export default {
   &::after {
     content: "";
     position: absolute;
-    top: 14px;
-    right: 20px;
-    width: 16px;
-    height: 16px;
+    top: 16px;
+    right: 19px;
+    width: 12px;
+    height: 12px;
     border-left: 2px solid $input-border-focus-color;
     border-bottom: 2px solid $input-border-focus-color;
     transform: rotate(-45deg);
@@ -70,6 +101,11 @@ export default {
     outline: none;
     border: 2px solid $input-border-focus-color;
     padding: 14px 56px 13px 15px;
+
+    &::after {
+      top: 15px;
+      right: 18px;
+    }
   }
 
   &:hover {
@@ -78,15 +114,17 @@ export default {
     color: $text-main;
 
     &::after {
-      top: 13px;
-      right: 19px;
+      top: 15px;
+      right: 18px;
     }
+  }
+
+  &--selected {
+    color: $text-main;
   }
 }
 
 .select__list {
-  display: none;
-
   list-style: none;
   margin: 0;
   position: absolute;
@@ -99,6 +137,7 @@ export default {
   box-shadow: $select-body-shadow;
   border-radius: 6px;
   padding: 12px 0;
+  z-index: 1;
 }
 
 .select__item {
@@ -115,10 +154,8 @@ export default {
 }
 
 .select__error {
-  display: none;
-
   position: absolute;
-  bottom: 0;
+  bottom: 14px;
   left: 0;
   font-size: 14px;
   line-height: 18px;

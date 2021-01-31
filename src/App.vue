@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Form
-    :fields="fields"
+        :fields="fields"
+        @selected="selected"
     />
   </div>
 </template>
@@ -62,8 +63,51 @@ export default {
             valid: false,
             change: false
           }
+        ],
+        selects: [
+          {
+            id: 'select-1',
+            name: 'language',
+            options: [
+              {
+                value: 'russian',
+                text: 'Русский',
+                active: false
+              },
+              {
+                value: 'English',
+                text: 'Английский',
+                active: false
+              },
+              {
+                value: 'China',
+                text: 'Китайский',
+                active: false
+              },
+              {
+                value: 'Spain',
+                text: 'Испанский',
+                active: false
+              }
+            ],
+            label: 'Язык',
+            placeholder: 'Язык',
+            error: 'Выберите один из пунктов',
+            valid: false,
+            change: false
+          }
         ]
       }
+    }
+  },
+  methods: {
+    selected (itemIndex, selectIndex) {
+      const select = this.fields.selects[selectIndex];
+      select.options.forEach(el => el.active = false);
+      select.placeholder = select.options[itemIndex].text
+      select.options[itemIndex].active = true;
+      select.change = true;
+      select.valid = true;
     }
   }
 }

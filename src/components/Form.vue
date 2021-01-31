@@ -12,7 +12,13 @@
           :key=fields.inputs[index].id
           :input="input"
       />
-      <Select/>
+      <Select
+          v-for="(select, index) in fields.selects"
+          :key=fields.selects[index].id
+          :selectIndex="index"
+          :select="select"
+          @selected="selected"
+      />
       <Checkbox
           v-for="(checkbox, index) in fields.checkboxes"
           :key=fields.checkboxes[index].id
@@ -45,6 +51,9 @@ export default {
   methods: {
     onClick () {
       console.log(1);
+    },
+    selected (itemIndex, selectIndex) {
+      this.$emit('selected', itemIndex, selectIndex);
     }
   }
 }
