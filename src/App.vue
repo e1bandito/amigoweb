@@ -3,6 +3,10 @@
     <Form
         :fields="fields"
         @selected="selected"
+        @checked="checked"
+        @change="change"
+        @inputChange="inputChange"
+        :form-valid="formValid"
     />
   </div>
 </template>
@@ -25,7 +29,7 @@ export default {
             type: 'text',
             label: 'Имя',
             placeholder: 'Введите Ваше имя',
-            pattern: null,
+            pattern: /^[а-яА-Яa-zA-Z(\s-)]+$/i,
             error: 'Введено не корректное значение',
             valid: false,
             change: false
@@ -36,7 +40,7 @@ export default {
             type: 'email',
             label: 'Email',
             placeholder: 'Введите ваш email',
-            pattern: null,
+            pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             error: 'Введено не корректное значение',
             valid: false,
             change: false
@@ -47,7 +51,7 @@ export default {
             type: 'tel',
             label: 'Номер телефона',
             placeholder: 'Введите номер телефона',
-            pattern: null,
+            pattern: /^\+?[0-9][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/, // eslint-disable-line
             error: 'Введено не корректное значение',
             valid: false,
             change: false
@@ -108,6 +112,28 @@ export default {
       select.options[itemIndex].active = true;
       select.change = true;
       select.valid = true;
+    },
+    change (selectIndex) {
+      const select = this.fields.selects[selectIndex];
+      select.change = true;
+    },
+    checked (checked, checkboxIndex) {
+      const checkbox = this.fields.checkboxes[checkboxIndex];
+      checkbox.change = true;
+      checkbox.valid = checked;
+    },
+    inputChange(index, value) {
+      const input = this.fields.inputs[index];
+      input.change = true;
+      input.valid = input.pattern.test(value);
+    }
+  },
+  computed: {
+    formValid: function () {
+      let inputArr = this.fields.inputs;
+      let selectArr = this.fields.selects;
+      let checkboxArr = this.fields.checkboxes;
+      return (inputArr.every(el => el.valid === true) && selectArr.every(el => el.valid === true) && checkboxArr.every(el => el.valid === true));
     }
   }
 }

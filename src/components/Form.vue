@@ -5,27 +5,36 @@
         class="form__body"
         @submit.prevent="onClick"
     >
-      <h1 class="form__title">Регистрация</h1>
+      <h1
+          class="form__title"
+          :class="{'form__title--disabled': !formValid}"
+      >Регистрация</h1>
       <p class="form__text">Уже есть аккаунт? <a href="#" class="form__link">Войти</a></p>
       <Input
           v-for="(input, index) in fields.inputs"
           :key=fields.inputs[index].id
           :input="input"
+          :inputIndex="index"
+          @inputChange="inputChange"
       />
       <Select
           v-for="(select, index) in fields.selects"
           :key=fields.selects[index].id
           :selectIndex="index"
           :select="select"
+          @change="change"
           @selected="selected"
       />
       <Checkbox
           v-for="(checkbox, index) in fields.checkboxes"
           :key=fields.checkboxes[index].id
           :checkbox="checkbox"
+          :checkboxIndex="index"
+          @change="checked"
       />
       <Btn
       @click="onClick"
+      :form-valid="formValid"
       />
     </form>
   </div>
@@ -46,7 +55,8 @@ export default {
     Input
   },
   props: {
-    fields: Object
+    fields: Object,
+    formValid: Boolean
   },
   methods: {
     onClick () {
@@ -54,6 +64,15 @@ export default {
     },
     selected (itemIndex, selectIndex) {
       this.$emit('selected', itemIndex, selectIndex);
+    },
+    change (selectIndex) {
+      this.$emit('change', selectIndex);
+    },
+    checked (checked, checkboxIndex) {
+      this.$emit('checked', checked, checkboxIndex);
+    },
+    inputChange (index, value) {
+      this.$emit('inputChange', index, value);
     }
   }
 }

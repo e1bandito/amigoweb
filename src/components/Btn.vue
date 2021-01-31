@@ -1,12 +1,16 @@
 <template>
   <button class="btn"
           @click="clickBtn"
+          :disabled="!formValid"
   >Зарегистрироваться</button>
 </template>
 
 <script>
 export default {
   name: "Btn",
+  props: {
+    formValid: Boolean
+  },
   methods: {
     clickBtn () {
       this.$emit('click');

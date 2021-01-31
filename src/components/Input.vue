@@ -1,9 +1,19 @@
 <template>
   <div class="input">
     <label class="input__label">{{ input.label }}
-      <input :type=input.type class="input__field" :name=input.name :placeholder=input.placeholder>
+      <input
+          :type=input.type
+          class="input__field"
+          :name=input.name
+          :placeholder=input.placeholder
+          v-model.trim="value"
+          @input="onInput"
+      >
     </label>
-    <span class="input__error">{{ input.error }}</span>
+    <span
+        class="input__error"
+        v-if="input.change && !input.valid"
+    >{{ input.error }}</span>
   </div>
 </template>
 
@@ -11,7 +21,18 @@
 export default {
   name: "Input",
   props: {
-    input: Object
+    input: Object,
+    inputIndex: Number
+  },
+  data () {
+    return {
+      value: null
+    }
+  },
+  methods: {
+    onInput () {
+      this.$emit('inputChange', this.inputIndex, this.value);
+    }
   }
 }
 </script>
@@ -32,7 +53,7 @@ export default {
 }
 
 .input__field {
-  padding: 15px 16px 15px;
+  padding: 15px 16px;
   margin-top: 7px;
   width: 100%;
   background: $white;
@@ -51,20 +72,18 @@ export default {
   &:focus {
     outline: none;
     border: 2px solid $input-border-focus-color;
-    padding: 15px 15px 14px;
+    padding: 14px 15px;
   }
 
   &:hover {
     border: 2px solid $input-border-focus-color;
-    padding: 15px 15px 14px;
+    padding: 14px 15px;
   }
 }
 
 .input__error {
-  display: none;
-
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   font-size: 14px;
   line-height: 18px;

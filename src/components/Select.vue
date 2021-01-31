@@ -42,6 +42,7 @@ export default {
   methods: {
     toggleList () {
       this.openList = !this.openList;
+      this.$emit('change', this.selectIndex);
     },
     onSelectItem (itemIndex) {
       this.openList = false;

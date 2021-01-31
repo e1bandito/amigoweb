@@ -1,8 +1,18 @@
 <template>
   <div class="checkbox">
-    <input :id=checkbox.id :name="checkbox.name" :type=checkbox.type class="checkbox__field visually-hidden">
+    <input
+        :id=checkbox.id
+        :name="checkbox.name"
+        :type=checkbox.type
+        class="checkbox__field visually-hidden"
+        @change="onCheck"
+        v-model="checked"
+    >
     <label :for=checkbox.id class="checkbox__label" v-html="checkbox.label"></label>
-    <span class="checkbox__error">{{ checkbox.error }}</span>
+    <span
+        class="checkbox__error"
+        v-if="checkbox.change && !checkbox.valid"
+    >{{ checkbox.error }}</span>
   </div>
 </template>
 
@@ -10,7 +20,18 @@
 export default {
   name: "Checkbox",
   props: {
-    checkbox: Object
+    checkbox: Object,
+    checkboxIndex: Number
+  },
+  data () {
+    return {
+      checked: false
+    }
+  },
+  methods: {
+    onCheck () {
+      this.$emit('change', this.checked, this.checkboxIndex);
+    }
   }
 }
 </script>
@@ -81,10 +102,8 @@ export default {
 }
 
 .checkbox__error {
-  display: none;
-
   position: absolute;
-  bottom: 0;
+  bottom: 16px;
   left: 0;
   font-size: 14px;
   line-height: 18px;
