@@ -7,9 +7,17 @@
     >
       <h1 class="form__title">Регистрация</h1>
       <p class="form__text">Уже есть аккаунт? <a href="#" class="form__link">Войти</a></p>
-      <Input/>
+      <Input
+          v-for="(input, index) in fields.inputs"
+          :key=fields.inputs[index].id
+          :input="input"
+      />
       <Select/>
-      <Checkbox/>
+      <Checkbox
+          v-for="(checkbox, index) in fields.checkboxes"
+          :key=fields.checkboxes[index].id
+          :checkbox="checkbox"
+      />
       <Btn
       @click="onClick"
       />
@@ -30,6 +38,9 @@ export default {
     Checkbox,
     Select,
     Input
+  },
+  props: {
+    fields: Object
   },
   methods: {
     onClick () {

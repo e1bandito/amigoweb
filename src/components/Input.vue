@@ -1,15 +1,18 @@
 <template>
   <div class="input">
-    <label class="input__label">Имя
-      <input type="text" class="input__field" placeholder="Введите Ваше имя">
+    <label class="input__label">{{ input.label }}
+      <input :type=input.type class="input__field" :name=input.name :placeholder=input.placeholder>
     </label>
-    <span class="input__error">Введено не корректное значение</span>
+    <span class="input__error">{{ input.error }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Input"
+  name: "Input",
+  props: {
+    input: Object
+  }
 }
 </script>
 

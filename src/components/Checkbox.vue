@@ -1,14 +1,17 @@
 <template>
   <div class="checkbox">
-    <input id="checkbox" type="checkbox" class="checkbox__field visually-hidden" placeholder="Введите Ваше имя">
-    <label for="checkbox" class="checkbox__label">Принимаю <a href="#" class="checkbox__link">условия</a> использования</label>
-    <span class="checkbox__error">Примите условия использования</span>
+    <input :id=checkbox.id :name="checkbox.name" :type=checkbox.type class="checkbox__field visually-hidden">
+    <label :for=checkbox.id class="checkbox__label" v-html="checkbox.label"></label>
+    <span class="checkbox__error">{{ checkbox.error }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Checkbox"
+  name: "Checkbox",
+  props: {
+    checkbox: Object
+  }
 }
 </script>
 
