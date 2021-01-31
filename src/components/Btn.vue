@@ -12,7 +12,7 @@ export default {
     formValid: Boolean
   },
   methods: {
-    clickBtn () {
+    clickBtn() {
       this.$emit('click');
     }
   }

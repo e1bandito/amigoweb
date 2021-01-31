@@ -23,13 +23,13 @@ export default {
     checkbox: Object,
     checkboxIndex: Number
   },
-  data () {
+  data() {
     return {
       checked: false
     }
   },
   methods: {
-    onCheck () {
+    onCheck() {
       this.$emit('change', this.checked, this.checkboxIndex);
     }
   }
@@ -46,6 +46,7 @@ export default {
 }
 
 .checkbox__label {
+  display: block;
   position: relative;
   padding-left: 36px;
   color: $text-light;

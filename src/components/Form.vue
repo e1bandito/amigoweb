@@ -59,19 +59,19 @@ export default {
     formValid: Boolean
   },
   methods: {
-    onClick () {
+    onClick() {
       console.log(1);
     },
-    selected (itemIndex, selectIndex) {
+    selected(itemIndex, selectIndex) {
       this.$emit('selected', itemIndex, selectIndex);
     },
-    change (selectIndex) {
+    change(selectIndex) {
       this.$emit('change', selectIndex);
     },
-    checked (checked, checkboxIndex) {
+    checked(checked, checkboxIndex) {
       this.$emit('checked', checked, checkboxIndex);
     },
-    inputChange (index, value) {
+    inputChange(index, value) {
       this.$emit('inputChange', index, value);
     }
   }

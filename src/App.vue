@@ -19,7 +19,7 @@ export default {
   components: {
     Form
   },
-  data () {
+  data() {
     return {
       fields: {
         inputs: [
@@ -105,7 +105,7 @@ export default {
     }
   },
   methods: {
-    selected (itemIndex, selectIndex) {
+    selected(itemIndex, selectIndex) {
       const select = this.fields.selects[selectIndex];
       select.options.forEach(el => el.active = false);
       select.placeholder = select.options[itemIndex].text
@@ -113,11 +113,11 @@ export default {
       select.change = true;
       select.valid = true;
     },
-    change (selectIndex) {
+    change(selectIndex) {
       const select = this.fields.selects[selectIndex];
       select.change = true;
     },
-    checked (checked, checkboxIndex) {
+    checked(checked, checkboxIndex) {
       const checkbox = this.fields.checkboxes[checkboxIndex];
       checkbox.change = true;
       checkbox.valid = checked;
@@ -129,10 +129,10 @@ export default {
     }
   },
   computed: {
-    formValid: function () {
-      let inputArr = this.fields.inputs;
-      let selectArr = this.fields.selects;
-      let checkboxArr = this.fields.checkboxes;
+    formValid: function() {
+      const inputArr = this.fields.inputs;
+      const selectArr = this.fields.selects;
+      const checkboxArr = this.fields.checkboxes;
       return (inputArr.every(el => el.valid === true) && selectArr.every(el => el.valid === true) && checkboxArr.every(el => el.valid === true));
     }
   }

@@ -30,7 +30,7 @@ export default {
     }
   },
   methods: {
-    onInput () {
+    onInput() {
       this.$emit('inputChange', this.inputIndex, this.value);
     }
   }
@@ -83,7 +83,7 @@ export default {
 
 .input__error {
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   left: 0;
   font-size: 14px;
   line-height: 18px;

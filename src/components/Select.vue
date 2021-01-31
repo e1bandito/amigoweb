@@ -34,20 +34,30 @@ export default {
     select: Object,
     selectIndex: Number
   },
-  data () {
+  data() {
     return {
       openList: false
     }
   },
   methods: {
-    toggleList () {
+    toggleList() {
       this.openList = !this.openList;
       this.$emit('change', this.selectIndex);
     },
-    onSelectItem (itemIndex) {
+    onSelectItem(itemIndex) {
       this.openList = false;
       this.$emit('selected', itemIndex, this.selectIndex);
+    },
+    hideList() {
+      this.openList = false;
     }
+  },
+  mounted() {
+    document.addEventListener('click', (e) => {
+      if(!e.target.classList.contains('select__placeholder')) {
+        this.hideList();
+      }
+    });
   }
 }
 </script>
