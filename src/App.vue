@@ -6,7 +6,8 @@
         @checked="checked"
         @change="change"
         @inputChange="inputChange"
-        :form-valid="formValid"
+        :formValid="formValid"
+        @submitForm="getUserInfo"
     />
   </div>
 </template>
@@ -21,11 +22,19 @@ export default {
   },
   data() {
     return {
+      userData: {
+        name: null,
+        email: null,
+        phone: null,
+        lang: null,
+        policy: false
+      },
       fields: {
         inputs: [
           {
             id: 'input-1',
             name: 'name',
+            value: null,
             type: 'text',
             label: 'Имя',
             placeholder: 'Введите Ваше имя',
@@ -37,6 +46,7 @@ export default {
           {
             id: 'input-2',
             name: 'email',
+            value: null,
             type: 'email',
             label: 'Email',
             placeholder: 'Введите ваш email',
@@ -48,6 +58,7 @@ export default {
           {
             id: 'input-3',
             name: 'phone',
+            value: null,
             type: 'tel',
             label: 'Номер телефона',
             placeholder: 'Введите номер телефона',
@@ -74,7 +85,7 @@ export default {
             name: 'language',
             options: [
               {
-                value: 'russian',
+                value: 'Russian',
                 text: 'Русский',
                 active: false
               },
@@ -96,6 +107,7 @@ export default {
             ],
             label: 'Язык',
             placeholder: 'Язык',
+            value: null,
             error: 'Выберите один из пунктов',
             valid: false,
             change: false
@@ -110,6 +122,7 @@ export default {
       select.options.forEach(el => el.active = false);
       select.placeholder = select.options[itemIndex].text
       select.options[itemIndex].active = true;
+      select.value = select.options[itemIndex].value;
       select.change = true;
       select.valid = true;
     },
@@ -125,7 +138,16 @@ export default {
     inputChange(index, value) {
       const input = this.fields.inputs[index];
       input.change = true;
+      input.value = value;
       input.valid = input.pattern.test(value);
+    },
+    getUserInfo() {
+      this.userData.name = this.fields.inputs[0].value;
+      this.userData.email = this.fields.inputs[1].value;
+      this.userData.phone = this.fields.inputs[2].value;
+      this.userData.policy = this.fields.checkboxes[0].valid;
+      this.userData.lang = this.fields.selects[0].value;
+      console.log(this.userData);
     }
   },
   computed: {

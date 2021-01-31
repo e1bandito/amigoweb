@@ -3,7 +3,7 @@
     <form
         action=""
         class="form__body"
-        @submit.prevent="onClick"
+        @submit.prevent="submitForm"
     >
       <h1
           class="form__title"
@@ -33,8 +33,8 @@
           @change="checked"
       />
       <Btn
-      @click="onClick"
-      :form-valid="formValid"
+      @clickBtn="submitForm"
+      :formValid="formValid"
       />
     </form>
   </div>
@@ -59,8 +59,8 @@ export default {
     formValid: Boolean
   },
   methods: {
-    onClick() {
-      console.log(1);
+    submitForm() {
+      this.$emit('submitForm');
     },
     selected(itemIndex, selectIndex) {
       this.$emit('selected', itemIndex, selectIndex);
